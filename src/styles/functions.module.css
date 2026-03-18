@@ -1,0 +1,151 @@
+.functions {
+  padding: 30px 20px;
+  text-align: center;
+  background: white;
+}
+
+.functions h2 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #b57c7c;
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* CENTER 3RD CARD */
+.grid > :nth-child(3) {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: 100%;
+  max-width: 420px;
+}
+
+/* CARD */
+.eventCard {
+  position: relative;
+  height: 220px;
+  border-radius: 20px;
+  overflow: hidden;
+
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.eventCard:hover {
+  transform: scale(1.03);
+}
+
+/* OVERLAY */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35); /* 🔥 stronger dim */
+}
+
+/* GLASS CONTENT */
+.eventContent {
+  position: relative;
+  z-index: 2;
+
+ width: 92%;   /* 🔥 was 75% — this is your main problem */
+  max-width: 340px;
+ padding: 14px 16px; /* tighter + balanced */
+
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+
+border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.2);
+
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+
+color: white;
+  text-align: center;
+
+  text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+ margin-bottom: 15px;
+ 
+}
+
+/* top glass highlight */
+.eventContent::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.6);
+  opacity: 0.6;
+}
+
+/* TEXT */
+.eventContent h3 {
+  font-size: 1.5rem;   /* 🔥 bigger */
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.eventContent p {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* BUTTON */
+.eventContent button {
+  margin-top: 12px;
+  padding: 8px 18px;  /* bigger */
+  font-size: 0.9rem;
+  font-weight: 500;
+
+
+  border-radius: 20px;
+ border: 1px solid rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.1);
+  color: white;
+
+  backdrop-filter: blur(2px);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.eventContent button:hover {
+  background: white;
+ color: black;
+}
+.eventContent p:nth-child(3) {
+  font-size: 1rem;
+  color: #ffdede; /* subtle highlight */
+  font-weight: 600;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .grid > :nth-child(3) {
+    max-width: 100%;
+  }
+}
