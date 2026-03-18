@@ -1,7 +1,9 @@
+/* SECTION */
 .functions {
-  padding: 30px 20px;
+  padding: 20px 20px;
   text-align: center;
   background: white;
+  padding-top: 60px;
 }
 
 .functions h2 {
@@ -35,29 +37,50 @@
 /* CARD */
 .eventCard {
   position: relative;
-  height: 220px;
+  height: 210px;
   border-radius: 20px;
   overflow: hidden;
-
-  background-size: cover;
-  background-position: center;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  transition: transform 0.3s ease, filter 0.3s ease;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+
+  opacity: 0;
+  transform: translateY(40px);
 }
 
 .eventCard:hover {
-  transform: scale(1.03);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
 }
 
-/* OVERLAY */
+/* BACKGROUND IMAGE */
+.bgImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  transition: transform 0.6s ease;
+}
+
+.eventCard:hover .bgImage {
+  transform: scale(1.08);
+}
+
+/* OVERLAY (DEPTH FIX) */
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.35); /* 🔥 stronger dim */
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.6),
+    rgba(0,0,0,0.25),
+    rgba(0,0,0,0.1)
+  );
 }
 
 /* GLASS CONTENT */
@@ -65,29 +88,35 @@
   position: relative;
   z-index: 2;
 
- width: 92%;   /* 🔥 was 75% — this is your main problem */
-  max-width: 340px;
- padding: 14px 16px; /* tighter + balanced */
+  width: 92%;
+  padding: 18px;
 
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(10px);
 
-border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 
   box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.2),
-    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4);
 
-color: white;
   text-align: center;
+  color: white;
 
-  text-shadow: 0 2px 6px rgba(0,0,0,0.8);
- margin-bottom: 15px;
- 
+  transition: all 0.4s ease;
 }
 
-/* top glass highlight */
+/* HOVER GLASS ENHANCE */
+.eventCard:hover .eventContent {
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.3),
+    inset 0 1px 2px rgba(255,255,255,0.5);
+}
+
+/* TOP GLASS HIGHLIGHT */
 .eventContent::after {
   content: "";
   position: absolute;
@@ -99,46 +128,80 @@ color: white;
   opacity: 0.6;
 }
 
-/* TEXT */
+/* TITLE */
 .eventContent h3 {
-  font-size: 1.5rem;   /* 🔥 bigger */
+  font-size: 1.7rem;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  color: #fff;
 }
 
+/* DATE */
 .eventContent p {
-  font-size: 0.9rem;
-  opacity: 0.9;
+  font-size: 0.95rem;
+  margin: 4px 0;
+  color: rgba(255,255,255,0.9);
+  font-weight: 500;
 }
 
-/* BUTTON */
-.eventContent button {
+/* TIME (HIGHLIGHT) */
+.time {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffd6d6;
+}
+
+/* LOCATION */
+.location {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.3;
+}
+
+/* MAP BUTTON (ANCHOR FIXED) */
+.mapBtn {
+  display: inline-block;
   margin-top: 12px;
-  padding: 8px 18px;  /* bigger */
+  padding: 8px 18px;
   font-size: 0.9rem;
   font-weight: 500;
 
-
   border-radius: 20px;
- border: 1px solid rgba(255,255,255,0.6);
+
+
   background: rgba(255,255,255,0.1);
   color: white;
+  text-decoration: none;
 
   backdrop-filter: blur(2px);
-  cursor: pointer;
-  transition: 0.3s;
+
+  transition: all 0.3s ease;
 }
 
-.eventContent button:hover {
+.mapBtn:hover {
+  transform: scale(1.08);
   background: white;
- color: black;
-}
-.eventContent p:nth-child(3) {
-  font-size: 1rem;
-  color: #ffdede; /* subtle highlight */
-  font-weight: 600;
+  color: #333;
+   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
+/* visible state */
+.show {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s ease;
+}
+
+.eventCard:nth-child(1).show {
+  transition-delay: 0.1s;
+}
+.eventCard:nth-child(2).show {
+  transition-delay: 0.25s;
+}
+.eventCard:nth-child(3).show {
+  transition-delay: 0.4s;
+}
 /* MOBILE */
 @media (max-width: 768px) {
   .grid {

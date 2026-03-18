@@ -1,0 +1,65 @@
+.venue {
+  padding: 20px 20px;
+  text-align: center;
+  background: #f9f6f5;
+}
+
+.venue h2 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #b57c7c;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
+
+/* CARD */
+.card {
+  max-width: 500px;
+  margin: auto;
+
+  padding: 30px 20px;
+
+  background: white;
+  border-radius: 18px;
+
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+/* TEXT */
+.card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+/* BUTTON */
+.card a {
+  display: inline-block;
+  padding: 10px 25px;
+
+  border-radius: 20px;
+  text-decoration: none;
+
+  background: #b57c7c;
+  color: white;
+
+  transition: 0.3s;
+}
+
+.card a:hover {
+  background: #9e6666;
+}

@@ -1,62 +1,68 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "../styles/functions.module.css";
-
-const events = [
-  {
-    title: "Reception",
-    image: "/reception.jpg",
-    date: "22 April 2026",
-    time: "5:00 PM",
-    location: "Garden Lawn",
-    map: "https://maps.google.com",
-  },
-  {
-    title: "Wedding Muhurtham",
-    image: "/wedding.jpg",
-    date: "23 April 2026",
-    time: "9:00 AM",
-    location: "Home",
-    map: "https://maps.google.com",
-  },
-  {
-    title: "Bigara Uta",
-    image: "/bigrautta.jpg",
-    date: "23 April 2026",
-    time: "11:30 AM",
-    location: "Temple",
-    map: "https://maps.google.com",
-  },
-];
+import { events } from "../data/events.js";
 
 const Functions = () => {
+  const cardsRef = useRef([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(styles.show);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    cardsRef.current.forEach((card) => {
+      if (card) observer.observe(card);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className={styles.functions}>
-  <h2>Wedding Events</h2>
-  <p className={styles.subtitle}>When & Where</p>
+      <h2>Wedding Events</h2>
+      <p className={styles.subtitle}>When & Where</p>
 
-  <div className={styles.grid}>
-    {events.map((event, index) => (
-      <div
-        className={styles.eventCard}
-        key={index}
-        style={{ backgroundImage: `url(${event.image})` }}
-      >
-        <div className={styles.overlay} />
+      <div className={styles.grid}>
+        {events.map((event, index) => (
+          <div
+            className={styles.eventCard}
+            key={event.title}
+            ref={(el) => (cardsRef.current[index] = el)}
+          >
+            <img
+              src={event.image}
+              alt={event.title}
+              className={styles.bgImage}
+            />
 
-        <div className={styles.eventContent}>
-          <h3>{event.title}</h3>
-          <p>📅 {event.date}</p>
-          <p>⏰ {event.time}</p>
-          <p>📍 {event.location}</p>
+            <div className={styles.overlay} />
 
-          <button onClick={() => window.open(event.map, "_blank")}>
-            View Map
-          </button>
-        </div>
+            <div className={styles.eventContent}>
+              <h3>{event.title}</h3>
+              <p>📅 {event.date}</p>
+              <p className={styles.time}>⏰ {event.time}</p>
+              <p className={styles.location}>📍 {event.location}</p>
+
+              <a
+                href={event.map}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.mapBtn}
+              >
+                View Map
+              </a>
+            </div>
+          </div>
+        ))}
       </div>
-    ))}
-  </div>
-</section>
+    </section>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "../styles/saveDate.module.css";
 
 const weddingDate = new Date("2026-04-22T00:00:00");
@@ -10,6 +10,9 @@ const SaveTheDate = () => {
     minutes: 0,
   });
 
+  const containerRef = useRef(null);
+
+  // 🔥 Countdown Logic
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
@@ -30,9 +33,21 @@ const SaveTheDate = () => {
     return () => clearInterval(timer);
   }, []);
 
+  // 🔥 Entry Animation
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (containerRef.current) {
+        containerRef.current.classList.add(styles.show);
+      }
+    }, 200);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // 🔥 Google Calendar Save
   const handleSave = () => {
     const title = "Sachin & Harshitha Wedding";
-    const details = "We’re getting married!";
+    const details = "Join us for our wedding celebration!";
     const location = "Krishnarajpete, Karnataka, India";
 
     const startDate = "20260422T000000Z";
@@ -48,32 +63,44 @@ const SaveTheDate = () => {
   };
 
   return (
-   <section className={styles.saveDate}>
-      <div className={styles.saveContent}>
-        <h1>Sachin X Harshitha</h1>
+    <section className={styles.saveDate}>
+      <div ref={containerRef} className={styles.saveContent}>
+        
+        <h1 className={styles.title}>Sachin & Harshitha</h1>
         <p className={styles.subtitle}>We’re getting married</p>
 
-        <div className={styles.dateRow}>
-          <span>save the date</span>
-          <span>22–23 April 2026</span>
+        <div className={styles.dateBlock}>
+          <span className={styles.label}>SAVE THE DATE</span>
+          <h2 className={styles.date}>22–23 April 2026</h2>
         </div>
 
-        <button onClick={handleSave}>save</button>
+        <button onClick={handleSave}>Save</button>
 
         <div className={styles.countdown}>
-          <div>
-            <span>{timeLeft.days}</span>
+          
+          <div className={styles.time}>
+            <span className={styles.number} key={timeLeft.days}>
+              {timeLeft.days}
+            </span>
             <p>Days</p>
           </div>
-          <div>
-            <span>{timeLeft.hours}</span>
+
+          <div className={styles.time}>
+            <span className={styles.number} key={timeLeft.hours}>
+              {timeLeft.hours}
+            </span>
             <p>Hours</p>
           </div>
-          <div>
-            <span>{timeLeft.minutes}</span>
+
+          <div className={styles.time}>
+            <span className={styles.number} key={timeLeft.minutes}>
+              {timeLeft.minutes}
+            </span>
             <p>Minutes</p>
           </div>
+
         </div>
+
       </div>
     </section>
   );
