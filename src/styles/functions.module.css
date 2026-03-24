@@ -36,7 +36,7 @@
 /* CARD */
 .eventCard {
   position: relative;
-  min-height: 240px; /* ✅ flexible instead of fixed */
+  min-height: 240px;
 
   border-radius: 20px;
   overflow: hidden;
@@ -44,6 +44,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  /* ✅ KEY FIX: vertical breathing space */
+  padding: 16px 0;
 
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 
@@ -71,7 +74,7 @@
   transform: scale(1.08);
 }
 
-/* OVERLAY (better readability) */
+/* OVERLAY */
 .overlay {
   position: absolute;
   inset: 0;
@@ -88,8 +91,8 @@
   position: relative;
   z-index: 2;
 
-  width: 90%;
-  padding: 20px 18px;
+  width: 86%; /* ✅ balanced spacing left/right */
+  padding: 24px 18px; /* ✅ more top/bottom space */
 
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(4px);
@@ -112,7 +115,7 @@
   transition: all 0.4s ease;
 }
 
-/* HOVER GLASS */
+/* HOVER */
 .eventCard:hover .eventContent {
   background: rgba(255, 255, 255, 0.18);
   box-shadow:
@@ -120,7 +123,7 @@
     inset 0 1px 2px rgba(255,255,255,0.5);
 }
 
-/* TOP GLASS LINE */
+/* GLASS LINE */
 .eventContent::after {
   content: "";
   position: absolute;
@@ -142,7 +145,7 @@
 /* TEXT */
 .eventContent p {
   font-size: 0.95rem;
-  margin: 5px 0;
+  margin: 6px 0;
   color: rgba(255,255,255,0.95);
   font-weight: 500;
 }
@@ -164,7 +167,7 @@
 /* BUTTON */
 .mapBtn {
   display: inline-block;
-  margin-top: 14px;
+  margin-top: 16px;
   padding: 8px 18px;
 
   border-radius: 20px;
@@ -195,7 +198,7 @@
 .eventCard:nth-child(2).show { transition-delay: 0.25s; }
 .eventCard:nth-child(3).show { transition-delay: 0.4s; }
 
-/* 🔥 MOBILE FIX (IMPORTANT) */
+/* MOBILE */
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
@@ -207,16 +210,17 @@
 
   .eventCard {
     min-height: 260px;
+    padding: 18px 0; /* ✅ more top/bottom space */
   }
 
   .eventContent {
-    padding: 22px 16px;
+    width: 88%;
+    padding: 24px 16px;
 
-    /* ✅ FIX BLUR ISSUE */
+    /* ✅ FIX blur issue */
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(3px);
 
-    /* ✅ improve readability */
     background: rgba(255, 255, 255, 0.18);
   }
 
@@ -234,9 +238,5 @@
 
   .location {
     font-size: 0.85rem;
-  }
-
-  .mapBtn {
-    margin-top: 16px;
   }
 }
