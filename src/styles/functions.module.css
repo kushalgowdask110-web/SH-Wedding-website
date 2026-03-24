@@ -36,9 +36,7 @@
 /* CARD */
 .eventCard {
   position: relative;
-
-  /* ❌ removed fixed height */
-  min-height: 240px; /* ✅ flexible */
+  min-height: 240px; /* ✅ flexible instead of fixed */
 
   border-radius: 20px;
   overflow: hidden;
@@ -73,15 +71,15 @@
   transform: scale(1.08);
 }
 
-/* OVERLAY */
+/* OVERLAY (better readability) */
 .overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(0,0,0,0.65),
-    rgba(0,0,0,0.3),
-    rgba(0,0,0,0.1)
+    rgba(0,0,0,0.7),
+    rgba(0,0,0,0.35),
+    rgba(0,0,0,0.15)
   );
 }
 
@@ -91,7 +89,7 @@
   z-index: 2;
 
   width: 90%;
-  padding: 20px 18px; /* ✅ better spacing */
+  padding: 20px 18px;
 
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(4px);
@@ -122,7 +120,7 @@
     inset 0 1px 2px rgba(255,255,255,0.5);
 }
 
-/* TOP LINE */
+/* TOP GLASS LINE */
 .eventContent::after {
   content: "";
   position: absolute;
@@ -145,7 +143,7 @@
 .eventContent p {
   font-size: 0.95rem;
   margin: 5px 0;
-  color: rgba(255,255,255,0.9);
+  color: rgba(255,255,255,0.95);
   font-weight: 500;
 }
 
@@ -160,7 +158,7 @@
 .location {
   font-size: 0.9rem;
   line-height: 1.4;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255,255,255,0.9);
 }
 
 /* BUTTON */
@@ -170,7 +168,7 @@
   padding: 8px 18px;
 
   border-radius: 20px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.12);
   color: white;
   text-decoration: none;
 
@@ -197,7 +195,7 @@
 .eventCard:nth-child(2).show { transition-delay: 0.25s; }
 .eventCard:nth-child(3).show { transition-delay: 0.4s; }
 
-/* MOBILE */
+/* 🔥 MOBILE FIX (IMPORTANT) */
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
@@ -208,11 +206,18 @@
   }
 
   .eventCard {
-    min-height: 260px; /* ✅ more space */
+    min-height: 260px;
   }
 
   .eventContent {
     padding: 22px 16px;
+
+    /* ✅ FIX BLUR ISSUE */
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(3px);
+
+    /* ✅ improve readability */
+    background: rgba(255, 255, 255, 0.18);
   }
 
   .eventContent h3 {
@@ -229,5 +234,9 @@
 
   .location {
     font-size: 0.85rem;
+  }
+
+  .mapBtn {
+    margin-top: 16px;
   }
 }
