@@ -1,9 +1,8 @@
 /* SECTION */
 .functions {
-  padding: 20px 20px;
+  padding: 60px 20px 30px;
   text-align: center;
   background: white;
-  padding-top: 60px;
 }
 
 .functions h2 {
@@ -37,10 +36,12 @@
 /* CARD */
 .eventCard {
   position: relative;
- height: 250px; /* was 210px */
+
+  /* ❌ removed fixed height */
+  min-height: 240px; /* ✅ flexible */
+
   border-radius: 20px;
   overflow: hidden;
-  padding: 24px 20px; /* top-bottom more */
 
   display: flex;
   justify-content: center;
@@ -72,14 +73,14 @@
   transform: scale(1.08);
 }
 
-/* OVERLAY (DEPTH FIX) */
+/* OVERLAY */
 .overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(0,0,0,0.6),
-    rgba(0,0,0,0.25),
+    rgba(0,0,0,0.65),
+    rgba(0,0,0,0.3),
     rgba(0,0,0,0.1)
   );
 }
@@ -89,16 +90,17 @@
   position: relative;
   z-index: 2;
 
-  width: 92%;
-  padding: 18px;
+  width: 90%;
+  padding: 20px 18px; /* ✅ better spacing */
 
   background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(8px);
 
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.3);
-   display: flex;
+
+  display: flex;
   flex-direction: column;
   justify-content: center;
 
@@ -112,7 +114,7 @@
   transition: all 0.4s ease;
 }
 
-/* HOVER GLASS ENHANCE */
+/* HOVER GLASS */
 .eventCard:hover .eventContent {
   background: rgba(255, 255, 255, 0.18);
   box-shadow:
@@ -120,7 +122,7 @@
     inset 0 1px 2px rgba(255,255,255,0.5);
 }
 
-/* TOP GLASS HIGHLIGHT */
+/* TOP LINE */
 .eventContent::after {
   content: "";
   position: absolute;
@@ -134,23 +136,22 @@
 
 /* TITLE */
 .eventContent h3 {
-  font-size: 1.7rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  margin-bottom: 14px;
-  color: #fff;
+  margin-bottom: 12px;
 }
 
-/* DATE */
+/* TEXT */
 .eventContent p {
   font-size: 0.95rem;
-  margin: 6px 0;
+  margin: 5px 0;
   color: rgba(255,255,255,0.9);
   font-weight: 500;
 }
 
-/* TIME (HIGHLIGHT) */
+/* TIME */
 .time {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: #ffd6d6;
 }
@@ -158,22 +159,17 @@
 /* LOCATION */
 .location {
   font-size: 0.9rem;
-  font-weight: 500;
+  line-height: 1.4;
   color: rgba(255,255,255,0.85);
-  line-height: 1.5;
 }
 
-/* MAP BUTTON (ANCHOR FIXED) */
+/* BUTTON */
 .mapBtn {
   display: inline-block;
-  margin-top: 12px;
+  margin-top: 14px;
   padding: 8px 18px;
-  font-size: 0.9rem;
-  font-weight: 500;
 
   border-radius: 20px;
-
-
   background: rgba(255,255,255,0.1);
   color: white;
   text-decoration: none;
@@ -187,25 +183,20 @@
   transform: scale(1.08);
   background: white;
   color: #333;
-   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
-/* visible state */
+/* ANIMATION */
 .show {
   opacity: 1;
   transform: translateY(0);
   transition: all 0.8s ease;
 }
 
-.eventCard:nth-child(1).show {
-  transition-delay: 0.1s;
-}
-.eventCard:nth-child(2).show {
-  transition-delay: 0.25s;
-}
-.eventCard:nth-child(3).show {
-  transition-delay: 0.4s;
-}
+.eventCard:nth-child(1).show { transition-delay: 0.1s; }
+.eventCard:nth-child(2).show { transition-delay: 0.25s; }
+.eventCard:nth-child(3).show { transition-delay: 0.4s; }
+
 /* MOBILE */
 @media (max-width: 768px) {
   .grid {
@@ -214,5 +205,29 @@
 
   .grid > :nth-child(3) {
     max-width: 100%;
+  }
+
+  .eventCard {
+    min-height: 260px; /* ✅ more space */
+  }
+
+  .eventContent {
+    padding: 22px 16px;
+  }
+
+  .eventContent h3 {
+    font-size: 1.4rem;
+  }
+
+  .eventContent p {
+    font-size: 0.9rem;
+  }
+
+  .time {
+    font-size: 1.1rem;
+  }
+
+  .location {
+    font-size: 0.85rem;
   }
 }
